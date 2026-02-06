@@ -56,13 +56,13 @@
             background: linear-gradient(180deg, var(--bg-dark) 0%, transparent 100%);
         }
 
-        nav {
+        header .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 20px;
         }
 
         .logo-text {
@@ -71,6 +71,16 @@
             color: var(--accent);
             text-decoration: none;
             text-shadow: 2px 2px 0 var(--deep);
+            animation: flicker 3s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            92% { opacity: 1; }
+            93% { opacity: 0.8; }
+            94% { opacity: 1; }
+            95% { opacity: 0.9; }
+            96% { opacity: 1; }
         }
 
         .nav-links {
@@ -85,8 +95,22 @@
             color: var(--light);
             text-decoration: none;
             transition: all 0.2s;
+            position: relative;
         }
         .nav-links a:hover { color: var(--glow); text-shadow: 0 0 10px var(--glow); }
+        .nav-links a::after {
+            content: '_';
+            position: absolute;
+            right: -10px;
+            animation: blink 1s infinite;
+            opacity: 0;
+        }
+        .nav-links a:hover::after { opacity: 1; }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
 
         /* Docs Layout */
         .docs-wrapper {
@@ -312,7 +336,7 @@
 </head>
 <body>
     <header>
-        <nav>
+        <div class="nav-container">
             <a href="index.html" class="logo-text">$SPECTR</a>
             <ul class="nav-links">
                 <li><a href="index.html">HOME</a></li>
@@ -320,7 +344,7 @@
                 <li><a href="game.html">GAME</a></li>
                 <li><a href="https://x.com/YOUR_TWITTER" target="_blank">TWITTER</a></li>
             </ul>
-        </nav>
+        </div>
     </header>
 
     <div class="container">
